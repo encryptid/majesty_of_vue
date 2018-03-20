@@ -10,12 +10,14 @@
 <body>
     <div class="container">
         <h1>GOOD PEOPLE OF VUE</h1>
-        <ul v-for="(candidate, key) in candidates" class='list-group'>
-            <li class='list-group-item'>{{ candidate.name }} : {{ candidate.votes }}
-                <button class="btn btn-default" @click="candidate.votes++">Vote</button></li>
+        <ul class='list-group'>
+            <li v-for="candidate in candidates" class='list-group-item'>
+                {{ candidate.name }} : {{ candidate.votes }}
+                <button class="btn btn-default" @click="candidate.votes++">Vote</button>
+            </li>
         </ul>
         <input @keyup.delete='reload' class='form-control' type="text" placeholder="press 'delete' to reset">
-        <h1>Our Mayor is: {{ top.name }}</h1>
+        <h1>Our Mayor is: {{ top.name }}!</h1>
         <pre>
             {{ $data }}
         </pre>
@@ -27,22 +29,10 @@ new Vue ({
     el: '.container',
     data: {
         candidates: [
-            {
-                name: 'Mr. Black',
-                votes: 50,
-            },
-            {
-                name: 'Mr. Grey',
-                votes: 101,
-            },
-            {
-                name: 'Mr. White',
-                votes: 90,
-            },
-            {
-                name: 'Mr. Brown',
-                votes: 100,
-            }
+            { name: 'Mr. Black', votes: 50, },
+            { name: 'Mr. Grey', votes: 101, },
+            { name: 'Mr. White', votes: 90, },
+            { name: 'Mr. Brown', votes: 100, }
         ]
     },
     computed: {
