@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Type 2 numbers and choose the operation.</h1>
+        <form class="form-inline">
+            <input v-model.number='a' class='form-control'>
+            <select v-model='operator' class='form-control'>
+                <option>+</option>
+                <option>-</option>
+                <option>*</option>
+                <option>/</option>
+            </select>
+            <input v-model.number='b' class='form-control'>
+            <button type='submit' @click.prvent='calculate' class='btn btn-primary'>
+                Calculate
+            </button>
+        </form>
+        <h2>Result: {{a}} {{operator}} {{b}} = {{c}}</h2>
+        <pre>
+            {{ $data }}
+        </pre>
+    </div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script type="text/javascript">
+new Vue ({
+    el: '.container',
+    data: {
+        a: 1,
+        b: 2,
+        c: null,
+        operator: '+',
+    },
+    methods: {
+        calculate: function(){
+            switch (this.operator) {
+                case '+':
+                    this.c = this.a + this.b
+                    break;
+                case '-':
+                    this.c = this.a - this.b
+                    break;
+                case '*':
+                    this.c = this.a * this.b
+                    break;
+                case '/':
+                    this.c = this.a / this.b
+                    break;
+            }
+        }
+    },
+});
+</script>
+</html>

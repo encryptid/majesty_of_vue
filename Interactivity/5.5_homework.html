@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Elections</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>GOOD PEOPLE OF VUE</h1>
+        <ul v-for="candidate in candidates" class='list-group'>
+            <li class='list-group-item'>{{ candidate.name }} : {{ candidate.votes }} 
+                <button @click="candidate.votes++">Vote</button></li>
+        </ul>
+        <input class='form-control' type="text" placeholder="press 'delete' to reset">
+        <h1>Our Mayor is: {{ top }}</h1>
+        <pre>
+            {{ $data }}
+        </pre>
+    </div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script type="text/javascript">
+new Vue ({
+    el: '.container',
+    data: {
+        candidates: [
+            {
+                name: 'Mr. Black',
+                votes: 50,
+            },
+            {
+                name: 'Mr. Pink',
+                votes: 101,
+            },
+            {
+                name: 'Mr. White',
+                votes: 90,
+            },
+            {
+                name: 'Mr. Brown',
+                votes: 100,
+            }
+        ]
+    },
+    computed: {
+        top: function () {
+            //`this` points to the Vue instance
+            let cands = this.candidates;
+            cands.sort(function(a,b) {
+                return a.votes - b.votes
+            });
+            console.log(cands);
+            
+        }
+    },
+});
+</script>
+</html>

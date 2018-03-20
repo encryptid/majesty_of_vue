@@ -1,0 +1,37 @@
+<!Doctype HTML>
+<html>
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Stories</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Info about me:</h1>
+        <div>
+            <ul class='list-group'>
+                <li v-for="(attr, key, index) in info" class="list-group-item">
+                    {{ index }}. {{ key }}: {{ attr }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '.container',
+        data: {
+            info: {
+                Name: 'Josh',
+                Height: '5ft 11in',
+                Weight: '196.6 lbs',
+                EyeColor: 'Grey',
+                FavoriteFood: 'Donuts',
+            }
+        }
+    })
+</script>
+
+</html>
