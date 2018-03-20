@@ -10,12 +10,12 @@
 <body>
     <div class="container">
         <h1>GOOD PEOPLE OF VUE</h1>
-        <ul v-for="candidate in candidates" class='list-group'>
-            <li class='list-group-item'>{{ candidate.name }} : {{ candidate.votes }} 
-                <button @click="candidate.votes++">Vote</button></li>
+        <ul v-for="(candidate, key) in candidates" class='list-group'>
+            <li class='list-group-item'>{{ candidate.name }} : {{ candidate.votes }}
+                <button class="btn btn-default" @click="candidate.votes++">Vote</button></li>
         </ul>
-        <input class='form-control' type="text" placeholder="press 'delete' to reset">
-        <h1>Our Mayor is: {{ top }}</h1>
+        <input @keyup.delete='reload' class='form-control' type="text" placeholder="press 'delete' to reset">
+        <h1>Our Mayor is: {{ top.name }}</h1>
         <pre>
             {{ $data }}
         </pre>
@@ -32,7 +32,7 @@ new Vue ({
                 votes: 50,
             },
             {
-                name: 'Mr. Pink',
+                name: 'Mr. Grey',
                 votes: 101,
             },
             {
@@ -48,14 +48,18 @@ new Vue ({
     computed: {
         top: function () {
             //`this` points to the Vue instance
-            let cands = this.candidates;
-            cands.sort(function(a,b) {
-                return a.votes - b.votes
+            let sortedCan = this.candidates.sort(function(a,b) {
+                return b.votes - a.votes
             });
-            console.log(cands);
-            
+            return sortedCan[0]
         }
     },
+    methods: {
+        reload: function() {
+            location.reload();
+        }
+    },
+    
 });
 </script>
 </html>
