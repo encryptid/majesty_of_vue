@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>Famous Stories</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Let's hear some stories!</h1>
+        <ul class="list-group">
+            <li v-for="story in orderedStories" class="list-group-item">
+                {{ story.writer }} said "{{ story.plot }}" and it was upvoted {{ story.upvotes }} times.
+            </li>
+        </ul>
+        <button class="btn btn-dark" @click="order = order * -1">Reverse Order</button>
+        <pre>
+        {{ $data }}
+        </pre>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '.container',
+        data: {
+            stories: [
+                {
+                    plot:"I've had too much coffee!",
+                    writer: "Josh",
+                    upvotes: 47
+                },
+                {
+                    plot: "I think I can see through space!",
+                    writer: "Josh",
+                    upvotes: 82
+                },
+                {
+                    plot: "Some guy just came by here. He talked really fast. He said something about space.",
+                    writer: "Bryan",
+                    upvotes: 88
+                },
+                {
+                    plot: "This salsa tastes funny...",
+                    writer: "Edson",
+                    upvotes: 75
+                },
+                {
+                    plot: "You gotta pace those!",
+                    writer: "Brian",
+                    upvotes: 22
+                }
+            ],
+            order: -1,
+        },
+        computed: {
+            orderedStories: function () {
+                var order = this.order;
+                return this.stories.sort(function (a, b) {
+                    return (a.upvotes - b.upvotes) * order;
+                })
+            }
+        }
+    })
+</script>
+
+</html>
