@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- https://css-tricks.com/using-filters-vue-js/ -->
+    <title>The Gotham Gazette</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>The Real Identities of Superheroes!</h1>
+        <ul class="list-group">
+            <li v-for="hero in heroes" class="list-group-item">
+                {{ hero | snitch }}
+            </li>
+        </ul>
+        <button v-on:click="reverseOrder" class="btn btn-dark">Reverse!</button>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.core.min.js"></script>
+<script>
+    Vue.filter('snitch', function (hero) {
+        return hero.secretId + ' is ' +
+            hero.firstname + ' ' +
+            hero.lastname + ' in real life!'
+    })
+
+    new Vue({
+        el: '.container',
+        data: {
+            heroes: [{
+                    firstname: 'Peter',
+                    lastname: 'Parker',
+                    secretId: 'Spider-Man'
+                },
+                {
+                    firstname: 'Bruce',
+                    lastname: 'Banner',
+                    secretId: 'The Hulk'
+                },
+                {
+                    firstname: 'Tony',
+                    lastname: 'Stark',
+                    secretId: 'Iron Man'
+                },
+                {
+                    firstname: 'Carol',
+                    lastname: 'Danvers',
+                    secretId: 'Captain Marvel'
+                },
+            ]
+        },
+        methods: {
+            reverseOrder: function () {
+                console.log(this.orders)
+                this.order = (this.order === 'desc') ? 'asc' : 'desc'
+            }
+        },
+        computed: {
+            orderedStories: function () {
+                var order = this.order;
+                return _.orderBy(this.stories, 'upvotes', [order]);
+            }
+        }
+    })
+</script>
+
+</html>
