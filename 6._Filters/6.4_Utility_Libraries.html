@@ -4,12 +4,12 @@
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- https://css-tricks.com/using-filters-vue-js/ -->
-    <title>The Gotham Gazette</title>
+    <title>The Daily Bugle</title>
 </head>
 
 <body>
     <div class="container">
-        <h1>The Real Identities of Superheroes!</h1>
+        <h1>The Real Identities of Superheroeses!</h1>
         <ul class="list-group">
             <li v-for="hero in heroes" class="list-group-item">
                 {{ hero | snitch }}
@@ -50,17 +50,21 @@
                     lastname: 'Danvers',
                     secretId: 'Captain Marvel'
                 },
-            ]
+            ],
+
+            order: 'desc',
         },
         methods: {
             reverseOrder: function () {
-                console.log(this.orders)
+                console.log(this.order)
                 this.order = (this.order === 'desc') ? 'asc' : 'desc'
             }
         },
         computed: {
             orderedStories: function () {
+            // it appears as though this computed property is not listening for the change for whatever reason
                 var order = this.order;
+                console.log(`calling 'orderedStories' ${order}`);
                 return _.orderBy(this.stories, 'upvotes', [order]);
             }
         }

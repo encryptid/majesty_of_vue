@@ -61,7 +61,7 @@
                 //a method which filters the stories depending on the writer
                 storiesBy: function (writer) {
                     return this.stories.filter(function (story) {
-                        console.log(`story is: ` + story.writer + `. Writer is: ` + writer);
+                        console.log(`story is: `, story.writer, `. Writer is: `, writer);
                         return story.writer === writer
                     })
                 },
