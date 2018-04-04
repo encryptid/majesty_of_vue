@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>More stories.</title>
+</head>
+
+<body>
+    <div class="container">
+            <h1>Lets hear some stories!</h1>
+            <div>
+                <h3>Alex's stories</h3>
+                <ul class="list-group">
+                    <story v-for="story in storiesBy('Alex')" :story="story"></story>
+                </ul>
+                <h3>John's stories</h3>
+                <ul class="list-group">
+                    <story v-for="story in storiesBy('John')" :story="story"></story>
+                </ul>
+                <div class="form-group">
+                    <label for="query">What are you looking for?</label>
+                    <input v-model="query" class="form-control">
+                </div>
+                <h3>Search results:</h3>
+                <ul class="list-group">
+                    <story v-for="story in search" :story="story"></story>
+                </ul>
+            </div>
+        </div>
+        <!-- <story v-bind:story="{plot: 'My horse is the dopest horse.', writer: 'Mr. Higglesby'}"></story>
+        <story v-bind:story="{plot: 'Narwhals are the unicorns of the sea.', writer: 'Jacques Cousteau'}"></story>
+        <story v-bind:story="{plot: 'Controversial opinion: the Dark Sside of the Force is stronger.', writer: 'Definitely Not the Emporer'}"></story> -->
+</body>
+<template id="story-template">
+    <li class="list-group-item">
+        {{ story.writer }} said "{{ story.body }}"</li>
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script type="text/javascript">
+    Vue.component('story', {
+        props: ['story'],
+        template: '#story-template',
+    });
+    new Vue({
+        el: '.container',
+        data: {
+            stories: [{
+                    plot: "I crashed my car today!",
+                    writer: "Alex",
+                    upvotes: 28
+                },
+                {
+                    plot: "Yesterday, someone stole my bag!",
+                    writer: "John",
+                    upvotes: 8
+                },
+                {
+                    plot: "Someone ate my chocolate...",
+                    writer: "John",
+                    upvotes: 51
+                },
+                {
+                    plot: "I ate someone's chocolate!",
+                    writer: "Alex",
+                    upvotes: 74
+                },
+            ],
+            query: ' '
+        },
+        methods: {
+            //a method which filters the stories depending on the writer
+            storiesBy: function (writer) {
+                return this.stories.filter(function (story) {
+                    return story.writer === writer
+                })
+            }
+        },
+        computed: {
+            search: function () {
+                let query = this.query;
+                return this.stories.filter(function (story) {
+                    return story.body.includes(query);
+                })
+            }
+        },
+    })
+</script>
+
+</html>
