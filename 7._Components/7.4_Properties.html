@@ -9,18 +9,18 @@
 
 <body>
     <div class="container">
-        <story plot="My horse is the dopest horse."></story>
-        <story plot="Narwhals are the unicorns of the sea."></story>
-        <story plot="Controversial opinion: the dark side of the Force is stronger"></story>
+        <story v-bind:story="{plot: 'My horse is the dopest horse.', writer: 'Mr. Higglesby'}"></story>
+        <story v-bind:story="{plot: 'Narwhals are the unicorns of the sea.', writer: 'Jacques Cousteau'}"></story>
+        <story v-bind:story="{plot: 'Controversial opinion: the dark side of the Force is stronger.', writer: 'Definitely Not the Emporer'}"></story>
     </div>
 </body>
 <template id="story-template">
-    <h1>{{ plot }}</h1>
+    <h1>{{ story.writer }} said "{{ story.plot }}"</h1>
 </template>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
 <script type="text/javascript">
     Vue.component('story', {
-        props: ['plot'],
+        props: ['story'],
         template: '#story-template',
     });
     new Vue({
