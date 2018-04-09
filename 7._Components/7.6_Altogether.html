@@ -11,7 +11,7 @@
         <div class="container">
             <h1>Lets hear some stories!</h1>
             <ul class="list-group">
-                <story v-for="story in storiesBy" :story="story"></story>
+                <story v-for="story in stories" :story="story"></story>
             </ul>
             <pre>{{ $data }}</pre>
         </div>
@@ -28,44 +28,28 @@
         template: '#story-template',
     });
     new Vue({
-        el: '.container',
+        el: '#app',
         data: {
             stories: [
                 {
-                    body: "I crashed my car today!",
-                    writer: "Alex",
+                    plot: "My horse is the dopest horse.",
+                    writer: "Mr. Higglesby",
                 },
                 {
-                    body: "Yesterday, someone stole my bag!",
-                    writer: "John",
+                    plot: "Narwhals are the unicorns of the sea.",
+                    writer: "Jacques Cousteau",
                 },
                 {
-                    body: "Someone ate my chocolate...",
-                    writer: "John",
+                    plot: "Controversial opinion: the Dark Side of the Force is stronger.",
+                    writer: "Definitely not the Emperor",
                 },
                 {
-                    body: "I ate someone's chocolate!",
-                    writer: "Alex",
+                    plot: "One does not simply walk to Mordor... One must bicycle.",
+                    writer: "Boromir, probably",
                 },
             ],
-            query: ' '
         },
-        methods: {
-            //a method which filters the stories depending on the writer
-            storiesBy: function (writer) {
-                return this.stories.filter(function (story) {
-                    return story.writer === writer
-                })
-            }
-        },
-        computed: {
-            search: function () {
-                let query = this.query;
-                return this.stories.filter(function (story) {
-                    return story.body.includes(query);
-                })
-            }
-        },
+        
     })
 </script>
 
