@@ -2,6 +2,7 @@
 <html>
 
 <head>
+        <!-- https://css-tricks.com/intro-to-vue-2-components-props-slots/ -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <title>Oh, hello Vue!</title>
 </head>
@@ -11,7 +12,13 @@
         <div class="container">
             <h1>Lets hear some stories!</h1>
             <ul class="list-group">
+                <!-- The confusion begins at the line below: -->
                 <story v-for="story in stories" :story="story"></story>
+                <!-- At this point, we have 3 'stories' in play; the element,
+                the item that is being produced from 'v-for' and the binding.
+                Which is which? I'm not sure this is a great example. I think
+                the next step should be to parse through the 'stories', renaming
+                them, if necessary, for clarity. -->
             </ul>
             <pre>{{ $data }}</pre>
         </div>
