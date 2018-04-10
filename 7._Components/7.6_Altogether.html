@@ -12,27 +12,47 @@
         <div class="container">
             <h1>Lets hear some stories!</h1>
             <ul class="list-group">
-                <!-- The confusion begins at the line below: -->
-                <story v-for="story in stories" :story="story"></story>
-                <!-- At this point, we have 3 'stories' in play; the element,
-                the item that is being produced from 'v-for' and the binding.
-                Which is which? I'm not sure this is a great example. I think
-                the next step should be to parse through the 'stories', renaming
-                them, if necessary, for clarity. -->
+                <vignette v-for="item in stories" :kittens="item"></vignette>
+                <!-- 
+                    I changed the name of the component to 'vignette' and the individual item in
+                    'stories' to item for clarity. Also, by changing the name of "props" to "kittens" and 
+                    binding "kittens" to the component, I think it is clearer to me what is goign on. 
+                    If I understand correctly, the for loop is returning individual 'item's, and then 
+                    assigns the value of each to the 'kittens' component, which essentially passes the
+                    writer and the plot to the template.
+                -->
             </ul>
             <pre>{{ $data }}</pre>
         </div>
     </div>
     <template id="story-template">
         <li class="list-group-item">
-            {{ story.writer }} said "{{ story.plot }}"</li>
+            {{ kittens.writer }} said "{{ kittens.plot }}".
+            Story upvotes {{ kittens.upvotes }}.
+        <button v-show="!kittens.voted" @click="upvote" class="btn btn-dark">Upvote</button>
+        <button v-show="!isFavorite" @click="setFavorite" class="btn btn-primary">Favorite</button>
+        <span v-show="isFavorite" class="glyphicon gylphicon-star pull-right" aria-hidden="true"></span></li>
     </template>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
 <script type="text/javascript">
-    Vue.component('story', {
-        props: ['story'],
+    Vue.component('vignette', {
         template: '#story-template',
+        props: ['kittens'],
+        methods: {
+            upvote: function(){
+                this.kittens.upvotes += 1;
+                this.kittens.voted = true;
+            },
+            setFavorite: function() {
+                this.favorite = this.kittens;
+            },
+        },
+        computed: {
+                isFavorite: function() {
+                    return this.kittens == this.favorite;
+                },
+            }
     });
     new Vue({
         el: '#app',
@@ -41,20 +61,29 @@
                 {
                     plot: "My horse is the dopest horse.",
                     writer: "Mr. Higglesby",
+                    upvotes: 28,
+                    voted: false,
                 },
                 {
                     plot: "Narwhals are the unicorns of the sea.",
                     writer: "Jacques Cousteau",
+                    upvotes: 8,
+                    voted: false,
                 },
                 {
                     plot: "Controversial opinion: the Dark Side of the Force is stronger.",
                     writer: "Definitely not the Emperor",
+                    upvotes: 49,
+                    voted: false,
                 },
                 {
                     plot: "One does not simply walk to Mordor... One must bicycle.",
                     writer: "Boromir, probably",
+                    upvotes: 74,
+                    voted: false,
                 },
             ],
+            favorite: {}
         },
         
     })
