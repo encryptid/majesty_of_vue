@@ -11,8 +11,9 @@
     <div id="app">
         <div class="container">
             <h1>Lets hear some stories!</h1>
+            <span class="glyphicon gylphicon-star pull-right" aria-hidden="true"></span>
             <ul class="list-group">
-                <vignette v-for="item in stories" :kittens="item"></vignette>
+                <vignette v-for="item in stories" :kittens="item" :key="item.id" :favorite="favorite"></vignette>
                 <!-- 
                     I changed the name of the component to 'vignette' and the individual item in
                     'stories' to item for clarity. Also, by changing the name of "props" to "kittens" and 
@@ -38,7 +39,7 @@
 <script type="text/javascript">
     Vue.component('vignette', {
         template: '#story-template',
-        props: ['kittens'],
+        props: ['kittens', 'favorite'],
         methods: {
             upvote: function(){
                 this.kittens.upvotes += 1;
@@ -59,25 +60,25 @@
         data: {
             stories: [
                 {
-                    plot: "My horse is the dopest horse.",
+                    plot: "My horse is the dopest horse",
                     writer: "Mr. Higglesby",
                     upvotes: 28,
                     voted: false,
                 },
                 {
-                    plot: "Narwhals are the unicorns of the sea.",
+                    plot: "Narwhals are the unicorns of the sea",
                     writer: "Jacques Cousteau",
                     upvotes: 8,
                     voted: false,
                 },
                 {
-                    plot: "Controversial opinion: the Dark Side of the Force is stronger.",
+                    plot: "Controversial opinion: the Dark Side of the Force is stronger",
                     writer: "Definitely not the Emperor",
                     upvotes: 49,
                     voted: false,
                 },
                 {
-                    plot: "One does not simply walk to Mordor... One must bicycle.",
+                    plot: "One does not simply walk to Mordor... One must bicycle",
                     writer: "Boromir, probably",
                     upvotes: 74,
                     voted: false,
