@@ -10,7 +10,7 @@
 <body>
     <div id="app">
         <div class="container">
-            <h1>Lets hear some stories!</h1>
+            <h1>Lets hear some stories!<span class="glyphicon glyphicon-star"></span></h1>
             <span class="glyphicon gylphicon-star pull-right" aria-hidden="true"></span>
             <ul class="list-group">
                 <vignette v-for="item in stories" :kittens="item" :key="item.id" :favorite="favorite"></vignette>
@@ -32,7 +32,10 @@
             Story upvotes {{ kittens.upvotes }}.
         <button v-show="!kittens.voted" @click="upvote" class="btn btn-dark">Upvote</button>
         <button v-show="!isFavorite" @click="setFavorite" class="btn btn-primary">Favorite</button>
-        <span v-show="isFavorite" class="glyphicon gylphicon-star pull-right" aria-hidden="true"></span></li>
+        <span v-show="isFavorite" class="glyphicon glyphicon-star pull-right" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star"></span></li>
+        <!-- https://getbootstrap.com/docs/3.3/components/ -->
+        <!-- Star doesn't seem to be pulling in. -->
     </template>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
