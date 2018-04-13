@@ -2,16 +2,16 @@
 <html>
 
 <head>
-        <!-- https://css-tricks.com/intro-to-vue-2-components-props-slots/ -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- https://css-tricks.com/intro-to-vue-2-components-props-slots/ -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"> -->
     <title>Oh, hello Vue!</title>
 </head>
 
 <body>
     <div id="app">
         <div class="container">
-            <h1>Lets hear some stories!<span class="glyphicon glyphicon-star"></span></h1>
-            <span class="glyphicon gylphicon-star pull-right" aria-hidden="true"></span>
+            <h1>Lets hear some stories!</h1>
             <ul class="list-group">
                 <vignette v-for="item in stories" :kittens="item" :key="item.id" :favorite="favorite"></vignette>
                 <!-- 
@@ -30,12 +30,9 @@
         <li class="list-group-item">
             {{ kittens.writer }} said "{{ kittens.plot }}".
             Story upvotes {{ kittens.upvotes }}.
-        <button v-show="!kittens.voted" @click="upvote" class="btn btn-dark">Upvote</button>
+        <button v-show="!kittens.voted" @click="upvote" class="btn btn-success">Upvote</button>
         <button v-show="!isFavorite" @click="setFavorite" class="btn btn-primary">Favorite</button>
         <span v-show="isFavorite" class="glyphicon glyphicon-star pull-right" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star"></span></li>
-        <!-- https://getbootstrap.com/docs/3.3/components/ -->
-        <!-- Star doesn't seem to be pulling in. -->
     </template>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
