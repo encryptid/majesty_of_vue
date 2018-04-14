@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    
+    <title>Planet Express</title>
+</head>
+
+<body>
+    <div class="container">
+        <ul class='list-group'>
+            <Planets v-for="planet in planets" :deets="planet" key='planet.id'></Planets>
+        </ul>
+        
+    </div>
+</body>
+<template id="planetemplate">
+    <li class="list-group-item">
+        Planet Name: {{ planet.name}}
+        Number of Visits: {{ planet.visits }}
+        <button v-show='!maxed'>Visit</button>
+        <span v-show='visited' class="glyphicon glyphicon-globe"></span>
+    </li>
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script>
+    Vue.component ('Planets', {
+        template: '#planetemplate',
+        props: 'deets',
+        methods: {
+            maxed: function () {
+                if (this.vists >= 3) {
+                    return true
+                }
+            },
+            visited: function() {
+                if (this.visits <= 1) {
+                    return true
+                }
+            }
+        }
+    })
+    new Vue({
+        el: '.container',
+        data: {
+            planets: [
+                {
+                    name: 'Zorbnak',
+                    visits: 0
+                },
+                {
+                    name: 'Flerbish Seven',
+                    visits: 0,
+                },
+                {
+                    name: 'Tesselbaum',
+                    visits: 0,
+                },
+                {
+                    name: 'Cavendish',
+                    visits: 0,
+                },
+            ],
+        },
+    })
+</script>
+
+</html>
