@@ -3,6 +3,7 @@
 
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- https://css-tricks.com/intro-to-vue-2-components-props-slots/ -->
     
     <title>Planet Express</title>
 </head>
@@ -17,8 +18,8 @@
 </body>
 <template id="planetemplate">
     <li class="list-group-item">
-        Planet Name: {{ planet.name}}
-        Number of Visits: {{ planet.visits }}
+        Planet Name: {{ deets.name}}
+        Number of Visits: {{ deets.visits }}
         <button v-show='!maxed'>Visit</button>
         <span v-show='visited' class="glyphicon glyphicon-globe"></span>
     </li>
@@ -27,7 +28,7 @@
 <script>
     Vue.component ('Planets', {
         template: '#planetemplate',
-        props: 'deets',
+        props: ['deets'],
         methods: {
             maxed: function () {
                 if (this.vists >= 3) {
