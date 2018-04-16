@@ -10,18 +10,19 @@
 
 <body>
     <div class="container">
+        <h2>The Planetarium</h2>
         <ul class='list-group'>
             <Planets v-for="planet in planets" :deets="planet" key='planet.id'></Planets>
         </ul>
-        
+        <pre>{{ $data }}</pre>
     </div>
 </body>
 <template id="planetemplate">
     <li class="list-group-item">
-        Planet Name: {{ deets.name}}
-        Number of Visits: {{ deets.visits }}
-        <button v-show='!maxed'>Visit</button>
-        <span v-show='visited' class="glyphicon glyphicon-globe"></span>
+        Planet Name: {{ deets.name}}<br>
+        Number of Visits: {{ deets.visits }} &nbsp; &nbsp; &nbsp; &nbsp;
+        <button v-show='!deets.maxedOut' @click="addVisit">Visit</button>
+        <span v-show='deets.visited' class="glyphicon glyphicon-globe pull-right glyphicon-center"></span>
     </li>
 </template>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
@@ -30,16 +31,18 @@
         template: '#planetemplate',
         props: ['deets'],
         methods: {
-            maxed: function () {
-                if (this.vists >= 3) {
-                    return true
-                }
+            addVisit: function() {
+                this.deets.visited = true;
+                this.deets.visits += 1
+                if (this.deets.visits >= 3) {
+                    this.deets.maxedOut = true;
+                };
             },
-            visited: function() {
-                if (this.visits <= 1) {
-                    return true
-                }
-            }
+            // maxed: function () {
+            //     if (this.deets.visits >= 3) {
+            //         this.deets.maxedOut = true;
+            //     }
+            // },
         }
     })
     new Vue({
@@ -48,19 +51,27 @@
             planets: [
                 {
                     name: 'Zorbnak',
-                    visits: 0
+                    visits: 0,
+                    visited: false,
+                    maxedOut: false,
                 },
                 {
                     name: 'Flerbish Seven',
                     visits: 0,
+                    visited: false,
+                    maxedOut: false,
                 },
                 {
                     name: 'Tesselbaum',
                     visits: 0,
+                    visited: false,
+                    maxedOut: false,
                 },
                 {
                     name: 'Cavendish',
                     visits: 0,
+                    visited: false,
+                    maxedOut: false,
                 },
             ],
         },
