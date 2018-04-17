@@ -21,8 +21,8 @@
     <li class="list-group-item">
         Planet Name: {{ deets.name}}<br>
         Number of Visits: {{ deets.visits }} &nbsp; &nbsp; &nbsp; &nbsp;
-        <button v-show='!deets.maxedOut' @click="addVisit">Visit</button>
-        <span v-show='deets.visited' class="glyphicon glyphicon-globe pull-right glyphicon-center"></span>
+        <button v-show='open' @click="addVisit" class="btn btn-primary">Visit</button>
+        <span v-show='deets.visits > 0' class="glyphicon glyphicon-globe pull-right glyphicon-center"></span>
     </li>
 </template>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
@@ -32,17 +32,17 @@
         props: ['deets'],
         methods: {
             addVisit: function() {
-                this.deets.visited = true;
+                // this.deets.visited = true;
                 this.deets.visits += 1
-                if (this.deets.visits >= 3) {
-                    this.deets.maxedOut = true;
-                };
+                // if (this.deets.visits >= 3) {
+                //     this.deets.maxedOut = true;
+                // }
             },
-            // maxed: function () {
-            //     if (this.deets.visits >= 3) {
-            //         this.deets.maxedOut = true;
-            //     }
-            // },
+        },
+        computed: {
+            open: function() {
+                return this.deets.visits < 3
+            }
         }
     })
     new Vue({
