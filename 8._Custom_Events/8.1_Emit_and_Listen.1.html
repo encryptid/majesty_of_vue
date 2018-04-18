@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <title>Emit and Listen</title>
+</head>
+
+<body>
+    <div class="container">
+        <p style="font-size: 140px;">
+            {{ votes }}
+        </p>
+        <button class="btn btn-dark" @click="vote">Vote!</button>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '.container',
+        data: {
+            votes: 0
+        },
+        methods: {
+            vote: function (writer) {
+                this.$emit('voted')
+            },
+        },
+        created () {
+            this.$on('voted', function(button) {
+                this.votes++
+            })
+        }
+    })
+</script>
+</html>

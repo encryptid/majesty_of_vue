@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <title>Parent-Child Communication</title>
+</head>
+
+<body>
+    <div class="container text-center">
+        <p style="font-size: 140px;">
+            {{ votes }}
+        </p>
+        <food @kittens="countVote" name="Taquitos"></food>
+    </div>
+</body>
+<template id="food">
+    <button class="btn btn-default" @click='vote'> {{ name }} </button>
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script type="text/javascript">
+Vue.component('food', {
+    template: '#food',
+    props: ['name'],
+    methods: {
+        vote: function () {
+            console.log('emitting voted');
+            this.$emit('kittens');
+        }
+    }
+})
+    new Vue({
+        el: '.container',
+        data: {
+            votes: 0
+        },
+        methods: {
+            countVote: function () {
+                console.log('running countVote')
+                this.votes++
+            },
+        },
+    })
+</script>
+</html>
