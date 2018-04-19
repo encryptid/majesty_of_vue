@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Food Wars</title>
+</head>
+
+<body>
+    <div class="container text-center">
+        <p style="font-size: 140px;">
+            {{ votes }}
+        </p>
+        <div class="row">
+            <food @kittens="countVote" name="Taquitos"></food>
+            <food @kittens="countVote" name="Quesadillas"></food>
+            <food @kittens="countVote" name="Chimichangas"></food>
+        </div>
+    </div>
+</body>
+<template id="food">
+    <div class="text-center col-lg-4">
+        <p style="font-size: 40px;">
+            {{ votes }}
+        </p>
+        <button class="btn btn-default" @click='vote'> {{ name }} </button>
+    </div>
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script type="text/javascript">
+
+// let bus = new Vue()
+
+    Vue.component('food', {
+        template: '#food',
+        props: ['name'],
+        data: function () {
+            return {
+                votes: 0
+            }
+        },
+        methods: {
+            vote: function () {
+                console.log('emitting kittens');
+                this.votes++;
+                this.$emit('kittens');
+            }
+        }
+    })
+
+    new Vue({
+        el: '.container',
+        data: {
+            votes: 0
+        },
+        methods: {
+            countVote: function () {
+                console.log('running countVote because kittens were emitted')
+                this.votes++
+            },
+        },
+    })
+</script>
+
+</html>
