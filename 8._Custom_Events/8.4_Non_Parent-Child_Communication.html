@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- This concept proved difficult for me, so I created numbered notes to follow how the arguments are tracked.
+     I used 'kittens' because I felt it was absurd enough to be easy to track, instead of having some tense or
+     version of the word 'vote'. Also, I like kittens. -->
+    <title>Food Wars, pt. 2</title>
+</head>
+
+<body>
+    <div class="container text-center">
+        <p style="font-size: 140px;">
+            {{ votes }}
+        </p>
+        <div class="row">
+            <food @kittens="countVote" name="Taquitos"></food>
+            <food @kittens="countVote" name="Quesadillas"></food>
+            <food @kittens="countVote" name="Chimichangas"></food>
+            <!-- 3. Here, when the event "kittens" occurs, each element is listening to trigger 
+                the "countVote" method in the parent -->
+        </div>
+        <h1>Log:</h1>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="vote in log"> {{ vote }} </li>
+        </ul>
+    </div>
+</body>
+<template id="food">
+    <div class="text-center col-lg-4">
+        <p style="font-size: 40px;">
+            {{ votes }}
+        </p>
+        <button class="btn btn-default" @click='vote'> {{ name }} </button>
+        <!-- 1. Here, the method 'vote' is triggered in the child on 'click' -->
+    </div>
+</template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+<script type="text/javascript">
+
+    Vue.component('food', {
+        template: '#food',
+        props: ['name'],
+        data: function () {
+            return {
+                votes: 0
+            }
+        },
+        methods: {
+            vote: function (event) {
+                console.log(event);
+                this.votes++;
+                this.$emit('kittens', event.srcElement.textContent);
+                // 2. Here, in the child, the "kittens" event is emitted
+            }
+        }
+    })
+
+    new Vue({
+        el: '.container',
+        data: {
+            votes: 0,
+            log: []
+        },
+        methods: {
+            countVote: function (food) {
+                console.log('running countVote because kittens were emitted')
+                this.votes++
+                this.log.push(food + ' received a vote.');
+                console.log(this.log)
+                // Finally, the countVote method is triggered in the parent.
+            },
+        },
+    })
+</script>
+
+</html>
